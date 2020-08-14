@@ -22,7 +22,7 @@ pip install -r requirements.txt     # Install requirements
 python gardenbuilder/manage.py runserver
 ```
 
-Then navigate to [localhost:8000](http://localhost:8000).
+Then navigate to [localhost:8000/graphql](http://localhost:8000/graphql).
 You should see the graphiQL editor and be able to write queries like ```graphql
 query {
   allGardens{
