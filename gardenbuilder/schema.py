@@ -12,6 +12,5 @@ class Query(graphene.ObjectType):
     
     def resolve_all_gardens(root, info):
         return Garden.objects.all()
-        # return Garden.objects.select_related('category').all()
 
 schema = graphene.Schema(query=Query)
