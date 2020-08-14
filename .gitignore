@@ -43,4 +43,4 @@ MANIFEST
 
 # Environments
 env
-*.env
+**/*.env
