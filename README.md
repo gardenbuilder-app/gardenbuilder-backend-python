@@ -19,6 +19,7 @@ pip install -r requirements.txt     # Install requirements
 ## To Run
 
 ```bash
+python gardenbuilder/manage.py migrate
 python gardenbuilder/manage.py runserver
 ```
 
