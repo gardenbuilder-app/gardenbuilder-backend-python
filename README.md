@@ -27,7 +27,7 @@ Then navigate to [localhost:8000/graphql](http://localhost:8000/graphql).
 You should see the graphiQL editor and be able to write queries like
 ```graphql
 query {
-  allGardens{
+  gardens{
     gardenName
   }
 }
