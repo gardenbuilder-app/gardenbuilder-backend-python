@@ -28,4 +28,17 @@ class Bed(models.Model):
 
     class Meta:
         ordering = ['created']
+
+class Section(models.Model):
+    section_name = models.CharField(max_length=100, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+    bed_id = models.ForeignKey(Bed, related_name='sections', on_delete=models.CASCADE)
+    xLocation = models.PositiveSmallIntegerField(default=0)
+    yLocation = models.PositiveSmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.section_name
+
+    class Meta:
+        ordering = ['created']
     
