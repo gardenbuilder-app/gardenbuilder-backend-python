@@ -9,7 +9,7 @@ class Garden(models.Model):
     garden_name = models.CharField(max_length=100, blank=False)
     start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
-    user_id = models.ForeignKey(User, related_name='gardens', on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, related_name='gardens', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.garden_name
@@ -21,7 +21,7 @@ class Bed(models.Model):
     name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
-    garden_id = models.ForeignKey(Garden, related_name='beds', on_delete=models.CASCADE)
+    garden = models.ForeignKey(Garden, related_name='beds', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
     start_date = models.DateField(default=now)
     length = models.PositiveSmallIntegerField(default=0)
@@ -40,7 +40,7 @@ class Section(models.Model):
     end_date = models.DateField(blank=True, null=True)
     start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
-    bed_id = models.ForeignKey(Bed, related_name='sections', on_delete=models.CASCADE)
+    bed = models.ForeignKey(Bed, related_name='sections', on_delete=models.CASCADE)
     xLocation = models.PositiveSmallIntegerField(default=0)
     yLocation = models.PositiveSmallIntegerField(default=0)
 
@@ -53,7 +53,7 @@ class Plant(models.Model):
     start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     name = models.CharField(max_length=100, blank=False)
-    section_id = models.ForeignKey(Section, related_name='plants', on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, related_name='plants', on_delete=models.CASCADE)
     square_footage = models.DecimalField(default=.25, max_digits=3, decimal_places=2)
     square_footage_sfg = models.DecimalField(default=.25, max_digits=3, decimal_places=2)
 
@@ -67,7 +67,7 @@ class PlantVariety(models.Model):
     is_active = models.BooleanField(default=True)
     name = models.CharField(max_length=100, blank=False)
     scientific_name = models.CharField(max_length=100, blank=False)
-    plant_id = models.ForeignKey(Plant, related_name='plant_varieties', on_delete=models.CASCADE)
+    plant = models.ForeignKey(Plant, related_name='plant_varieties', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

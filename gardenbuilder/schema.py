@@ -11,24 +11,24 @@ class BedType(DjangoObjectType):
     class Meta:
         model = Bed
 
-class Section(DjangoObjectType):
+class SectionType(DjangoObjectType):
     class Meta:
         model = Section
 
-class Plant(DjangoObjectType):
+class PlantType(DjangoObjectType):
     class Meta:
         model = Plant
 
-class PlantVariety(DjangoObjectType):
+class PlantVarietyType(DjangoObjectType):
     class Meta:
         model = PlantVariety
 
 class Query(graphene.ObjectType):
     gardens = graphene.List(GardenType)
     beds = graphene.List(BedType)
-    sections = graphene.List(BedType)
-    plants = graphene.List(BedType)
-    plant_varieties = graphene.List(BedType)
+    sections = graphene.List(SectionType)
+    plants = graphene.List(PlantType)
+    plant_varieties = graphene.List(PlantVarietyType)
     
     def resolve_gardens(root, info):
         return Garden.objects.all()
