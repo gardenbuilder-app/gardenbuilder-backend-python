@@ -5,9 +5,9 @@ from django.utils.timezone import now
 # Create your models here
 class Garden(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateField(default=None)
+    end_date = models.DateField(blank=True, null=True)
     garden_name = models.CharField(max_length=100, blank=False)
-    start_date = models.DateField(default=now())
+    start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     user_id = models.ForeignKey(User, related_name='gardens', on_delete=models.CASCADE, default=1)
 
@@ -20,13 +20,13 @@ class Garden(models.Model):
 class Bed(models.Model):
     name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateField(default=None)
+    end_date = models.DateField(blank=True, null=True)
     garden_id = models.ForeignKey(Garden, related_name='beds', on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-    start_date = models.DateField(default=now())
+    start_date = models.DateField(default=now)
     length = models.PositiveSmallIntegerField(default=0)
     width = models.PositiveSmallIntegerField(default=0)
-    notes = models.CharField(max_length=500, blank=False)
+    notes = models.CharField(max_length=500)
 
     def __str__(self):
         return self.name
@@ -37,8 +37,8 @@ class Bed(models.Model):
 class Section(models.Model):
     name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateField(default=None)
-    start_date = models.DateField(default=now())
+    end_date = models.DateField(blank=True, null=True)
+    start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     bed_id = models.ForeignKey(Bed, related_name='sections', on_delete=models.CASCADE)
     xLocation = models.PositiveSmallIntegerField(default=0)
@@ -49,8 +49,8 @@ class Section(models.Model):
 
 class Plant(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateField(default=None)
-    start_date = models.DateField(default=now())
+    end_date = models.DateField(blank=True, null=True)
+    start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     name = models.CharField(max_length=100, blank=False)
     section_id = models.ForeignKey(Section, related_name='plants', on_delete=models.CASCADE)
@@ -62,8 +62,8 @@ class Plant(models.Model):
 
 class PlantVariety(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateField(default=None)
-    start_date = models.DateField(default=now())
+    end_date = models.DateField(blank=True, null=True)
+    start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     name = models.CharField(max_length=100, blank=False)
     scientific_name = models.CharField(max_length=100, blank=False)
