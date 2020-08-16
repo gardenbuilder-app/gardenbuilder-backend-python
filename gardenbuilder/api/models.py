@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Garden(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     garden_name = models.CharField(max_length=100, blank=False)
-    owner = models.ForeignKey(User, related_name='gardens', on_delete=models.CASCADE, default=1)
+    user_id = models.ForeignKey(User, related_name='gardens', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.garden_name
@@ -16,7 +16,7 @@ class Garden(models.Model):
 class Bed(models.Model):
     bed_name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
-    garden_id = models.ForeignKey(Garden, on_delete=models.CASCADE)
+    garden_id = models.ForeignKey(Garden, related_name='beds', on_delete=models.CASCADE)
     start_date = models.DateField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     length = models.PositiveSmallIntegerField(default=0)
