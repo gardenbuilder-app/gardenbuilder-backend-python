@@ -3,6 +3,7 @@ asgiref==3.2.10
 astroid==2.4.2
 Django==3.1
 django-environ==0.4.5
+django-graphql-jwt==0.3.1
 django-six==1.0.4
 graphene==2.1.8
 graphene-django==2.13.0
@@ -11,8 +12,10 @@ graphql-relay==2.0.1
 isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
+pkg-resources==0.0.0
 promise==2.3
 psycopg2==2.8.5
+PyJWT==1.7.1
 pylint==2.5.3
 pytz==2020.1
 Rx==1.6.1
