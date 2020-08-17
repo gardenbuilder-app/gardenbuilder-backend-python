@@ -45,4 +45,13 @@ class Query(graphene.ObjectType):
     def resolve_plant_varieties(root, info):
         return PlantVariety.objects.all()
 
+    def resolve_plant_variety_by_name(root, info, name):
+        try:
+            # plant = Plant.objects.get(name=name)
+            return PlantVariety.objects.get(name=name)
+            # return PlantVariety.objects.get(plant=plant)
+        except PlantVariety.DoesNotExist:
+            return None
+
+
 schema = graphene.Schema(query=Query)
