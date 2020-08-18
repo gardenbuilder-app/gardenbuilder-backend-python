@@ -1,11 +1,27 @@
 import graphene
 from graphene_django import DjangoObjectType
-from api.models import Garden, Bed, Section, Plant, PlantVariety 
+from .models import Garden, Bed, Section, Plant, PlantVariety 
 
 class GardenType(DjangoObjectType):
     class Meta:
         model = Garden
         fields = ('id', 'created', 'garden_name', 'start_date', 'is_active', 'user_id')
+
+class CreateGarden(graphene.Mutation):
+    id = graphene.ID()
+    garden_name = graphene.String(required=True)
+
+    class Arguments:
+        garden_name = graphene.String(required=True)
+
+    def mutate(self, info, garden_name):
+        garden = Garden(garden_name=garden_name)
+        garden.save()
+        
+        return CreateGarden(
+            id=garden.id,
+            garden_name=garden.garden_name
+        )
 
 class BedType(DjangoObjectType):
     class Meta:
@@ -45,13 +61,7 @@ class Query(graphene.ObjectType):
     def resolve_plant_varieties(root, info):
         return PlantVariety.objects.all()
 
-    def resolve_plant_variety_by_name(root, info, name):
-        try:
-            # plant = Plant.objects.get(name=name)
-            return PlantVariety.objects.get(name=name)
-            # return PlantVariety.objects.get(plant=plant)
-        except PlantVariety.DoesNotExist:
-            return None
+class Mutation(graphene.ObjectType):
+    create_garden = CreateGarden.Field()
 
-
-schema = graphene.Schema(query=Query)
+schema = graphene.Schema(query=Query, mutation=Mutation)
