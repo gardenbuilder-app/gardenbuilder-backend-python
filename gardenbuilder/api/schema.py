@@ -1,26 +1,30 @@
 import graphene
 from graphene_django import DjangoObjectType
 from .models import Garden, Bed, Section, Plant, PlantVariety 
+from users.schema import UserType
 
 class GardenType(DjangoObjectType):
     class Meta:
         model = Garden
-        fields = ('id', 'created', 'garden_name', 'start_date', 'is_active', 'user_id')
 
 class CreateGarden(graphene.Mutation):
-    id = graphene.ID()
+    id = graphene.Int()
     garden_name = graphene.String(required=True)
+    posted_by = graphene.Field(UserType)
 
     class Arguments:
         garden_name = graphene.String(required=True)
 
     def mutate(self, info, garden_name):
-        garden = Garden(garden_name=garden_name)
+        user = info.context.user or None
+
+        garden = Garden(garden_name=garden_name, posted_by=user)
         garden.save()
         
         return CreateGarden(
             id=garden.id,
-            garden_name=garden.garden_name
+            garden_name=garden.garden_name,
+            posted_by=garden.posted_by,
         )
 
 class BedType(DjangoObjectType):
