@@ -1,10 +1,10 @@
 # Gardenbuilder
 
-Main project for Gardenbuilder
+GraphQL API and database interface for Gardenbuilder
 
 ## About
 
-Made with Django, React, Postgres and GraphQL
+Made with Django, Postgres and GraphQL
 
 ## Before running
 
