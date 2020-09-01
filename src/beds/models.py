@@ -3,7 +3,7 @@ from django.utils.timezone import now
 from gardens.models import Garden
 
 class Bed(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    bed_name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
     garden = models.ForeignKey(Garden, related_name='beds', on_delete=models.CASCADE)
@@ -14,7 +14,7 @@ class Bed(models.Model):
     notes = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.name
+        return self.bed_name
 
     class Meta:
         ordering = ['created']

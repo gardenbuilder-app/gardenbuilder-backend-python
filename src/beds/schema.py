@@ -1,39 +1,65 @@
 import graphene
 from graphene_django import DjangoObjectType
-from .models import Garden
-from users.schema import UserType
+from beds.models import Bed
+from gardens.models import Garden
+from gardens.schema import GardenType
+from django.utils.timezone import now
+import traceback
 
 class BedType(DjangoObjectType):
     class Meta:
         model = Bed
 
-class CreateGarden(graphene.Mutation):
+class CreateBed(graphene.Mutation):
     id = graphene.Int()
-    garden_name = graphene.String(required=True)
-    owner = graphene.Field(UserType)
+    bed_name = graphene.String(required=True)
+    garden_id = graphene.Field(GardenType)
+    # start_date = graphene.Date(required=False)
+    length = graphene.Int(required=True)
+    width = graphene.Int(required=True)
+    notes = graphene.String(required=False)
 
     class Arguments:
-        garden_name = graphene.String(required=True)
+        bed_name = graphene.String(required=True)
+        garden_id = graphene.Int(required=True)
+        # start_date = graphene.Date(required=False)
+        length = graphene.Int(required=True)
+        width = graphene.Int(required=True)
+        notes = graphene.String(required=False)
 
-    def mutate(self, info, garden_name):
-        user = info.context.user or None
-
-        garden = Garden(garden_name=garden_name, owner=user)
-        garden.save()
+    def mutate(self, info, bed_name, length, width, garden_id, **kwargs ):
+        try: 
         
-        return CreateGarden(
-            id=garden.id,
-            garden_name=garden.garden_name,
-            owner=garden.owner,
+            garden = Garden.objects.get(id=garden_id)
+            bed = Bed(bed_name=bed_name, length=length, width=width, garden=garden)
+            # start_date = kwargs.get('start_date', now)
+            notes = kwargs.get('notes', '')
+            # bed.start_date = start_date
+            bed.notes = notes
+            bed.save()
+            
+        except Exception as e:
+            print(e) 
+            print(traceback.format_exc())
+        
+        
+        return CreateBed(
+            # id=bed.id,
+            bed_name=bed_name,
+            # garden_id=garden_id,
+            length=length,
+            # notes=notes,
+            # start_date=start_date,
+            width=width
         )
 
 class Query(graphene.ObjectType):
-    gardens = graphene.List(GardenType)
+    beds = graphene.List(BedType)
 
-    def resolve_gardens(self, info):
-        return Garden.objects.all()
+    def resolve_beds(self, info):
+        return Bed.objects.all()
 
 class Mutation(graphene.ObjectType):
-    create_garden = CreateGarden.Field()
+    create_bed = CreateBed.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
