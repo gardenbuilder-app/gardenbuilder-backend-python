@@ -4,6 +4,7 @@ from beds.models import Bed
 from beds.schema import BedType
 from sections.models import Section
 from django.utils.timezone import now
+from datetime import date
 
 class SectionType(DjangoObjectType):
     class Meta:
@@ -34,7 +35,7 @@ class CreateSection(graphene.Mutation):
         bed = Bed.objects.get(id=bed_id)
 
         # Retrieve optionally passed key word arguments
-        end_date = kwargs.get('end_date', '2099-00-00 00:00:00')
+        end_date = kwargs.get('end_date', date(year=2100, month=1, day=1))
         is_active = kwargs.get('is_active', True) 
         start_date = kwargs.get('start_date', now())
 
