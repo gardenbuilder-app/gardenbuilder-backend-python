@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'beds',
     'gardens',
     'plants',
+    'plantChoices',
     'sections',
     'varieties',
     'users.apps.UsersConfig',
