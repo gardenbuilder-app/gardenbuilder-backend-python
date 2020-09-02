@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'beds',
     'gardens',
+    'sections',
     'users.apps.UsersConfig',
 ]
 
