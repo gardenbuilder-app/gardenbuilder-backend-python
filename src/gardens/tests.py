@@ -35,16 +35,3 @@ class TestGardenInstance:
             self.garden.owner.email == self.EMAIL
             and self.garden.owner.password == self.PASSWORD
         )
-
-
-
-# """
-# Test that adding username when trying to create user throws error
-# """
-# @pytest.mark.django_db
-# def test_creating_user_with_username_throws_error():
-#     with pytest.raises(Exception) as e:
-#         CustomUser.objects.create_user(username='JohnLennon', email='johnlennon@thebeatels.com', password='John.john')
-#         assert str(e.value) == "CustomUser() got an unexpected keyword argument 'username'"
-
-
