@@ -3,7 +3,7 @@ import json
 from gardens.models import Garden
 from users.models import CustomUser
 from datetime import datetime
-from graphene_django.utils.testing import GraphQLTestCase
+from graphene_django.utils.testing import GraphQLTestCase, graphql_query
 
 class TestGardenInstance:
     """
@@ -39,8 +39,9 @@ class TestGardenInstance:
         )
 
 class TestGraphQLQueries(GraphQLTestCase):
-
-    """ gardens query returns a response and no errors """
+    """
+    Test that GraphQL queries related to gardens work and throw errors appropriately
+    """
     @pytest.mark.filterwarnings("ignore")
     def test_gardens_query(self):
         response = self.query(
@@ -57,9 +58,62 @@ class TestGraphQLQueries(GraphQLTestCase):
             }
             '''
         )
-
-        # content returned in json format
         content = json.loads(response.content)
 
-        # response 200 with no errors
+        # This validates the status code and if you get errors
         self.assertResponseNoErrors(response)
+    
+    @pytest.mark.filterwarnings("ignore")
+    def test_incorrect_gardens_query_throws_error(self):
+        response = self.query(
+            '''
+            query {
+                gardens {
+                    id
+                    gardenName
+                    dingdong
+                    owner {
+                        id
+                        email
+                    }
+                }
+            }
+            '''
+        )
+
+        # This validates the status code and if you get errors
+        self.assertResponseHasErrors(response)
+
+
+# class TestGraphQLQueries:
+
+#     """ define fixture """
+#     @pytest.fixture
+#     def query(client):
+#         def func(*args, **kwargs):
+#             return graphql_query(*args, **kwargs, client=client)
+#         return func
+
+#     @pytest.mark.current
+#     @pytest.mark.django_db
+#     @pytest.mark.filterwarnings("ignore")
+#     def test_gardens_query(query):
+#         response = query(
+#             '''
+#             query {
+#                 gardens {
+#                     id
+#                     gardenName
+#                     owner {
+#                         id
+#                         email
+#                     }
+#                 }
+#             }
+#             '''
+#         )
+#         # content returned in json format
+#         content = json.loads(response.content)
+
+#         # response 200 with no errors
+#         assert 'errors' not in content
