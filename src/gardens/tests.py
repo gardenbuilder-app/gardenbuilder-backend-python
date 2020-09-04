@@ -1,7 +1,9 @@
 import pytest
+import json
 from gardens.models import Garden
 from users.models import CustomUser
 from datetime import datetime
+from graphene_django.utils.testing import GraphQLTestCase
 
 class TestGardenInstance:
     """
@@ -35,3 +37,29 @@ class TestGardenInstance:
             self.garden.owner.email == self.EMAIL
             and self.garden.owner.password == self.PASSWORD
         )
+
+class TestGraphQLQueries(GraphQLTestCase):
+
+    """ gardens query returns a response and no errors """
+    @pytest.mark.filterwarnings("ignore")
+    def test_gardens_query(self):
+        response = self.query(
+            '''
+            query {
+                gardens {
+                    id
+                    gardenName
+                    owner {
+                        id
+                        email
+                    }
+                }
+            }
+            '''
+        )
+
+        # content returned in json format
+        content = json.loads(response.content)
+
+        # response 200 with no errors
+        self.assertResponseNoErrors(response)
