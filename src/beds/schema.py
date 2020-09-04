@@ -31,8 +31,15 @@ class CreateBed(graphene.Mutation):
         notes = graphene.String(required=False)
 
     def mutate(self, info, bed_name, length, width, garden_id, **kwargs ):
+        # Get logged in user info
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception('You must be logged in to create a bed!'
+        )
         # Get garden associated with id
-        garden = Garden.objects.get(id=garden_id)
+        garden = Garden.objects.get(id=garden_id, owner=user)
+        if not garden:
+            raise Exception('Invalid garden id!')
 
         # Get startDate and notes if they were optionally passed as key word arguments
         start_date = kwargs.get('start_date', now())
