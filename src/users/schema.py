@@ -25,13 +25,13 @@ class CreateUser(graphene.Mutation):
         return CreateUser(user=user)
 
 class Query(graphene.AbstractType):
-    me = graphene.Field(UserType)
+    current_user = graphene.Field(UserType)
     users = graphene.List(UserType)
 
     def resolve_users(self, info):
         return get_user_model().objects.all()
 
-    def resolve_me(self, info):
+    def resolve_current_user(self, info):
         user = info.context.user
         if user.is_anonymous:
             raise Exception('Not logged in!')
