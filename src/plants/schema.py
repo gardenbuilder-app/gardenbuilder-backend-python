@@ -6,9 +6,11 @@ from plants.models import Plant
 from django.utils.timezone import now
 from datetime import date
 
+
 class PlantType(DjangoObjectType):
     class Meta:
         model = Plant
+
 
 class CreateSection(graphene.Mutation):
     # Define final parameter types
@@ -31,13 +33,13 @@ class CreateSection(graphene.Mutation):
         square_footage = graphene.Float(required=False)
         square_footage_sfg = graphene.Float(required=False)
 
-    def mutate(self, info, bed_id, xLocation, yLocation, **kwargs ):
+    def mutate(self, info, bed_id, xLocation, yLocation, **kwargs):
         # Get bed associated with id
         section = Section.objects.get(id=section_id)
 
         # Retrieve optionally passed key word arguments
         end_date = kwargs.get('end_date', date(year=2100, month=1, day=1))
-        is_active = kwargs.get('is_active', True) 
+        is_active = kwargs.get('is_active', True)
         start_date = kwargs.get('start_date', now())
         square_footage = kwargs.get('square_footage', .25)
         square_footage_sfg = kwargs.get('square_footage_sfg', .25)
@@ -52,7 +54,7 @@ class CreateSection(graphene.Mutation):
             section=section
         )
         plant.save()
-    
+
         # Return all parameters
         return CreateSection(
             id=plant.id,
@@ -64,13 +66,16 @@ class CreateSection(graphene.Mutation):
             section=section
         )
 
+
 class Query(graphene.ObjectType):
     sections = graphene.List(SectionType)
 
     def resolve_sections(self, info):
         return Section.objects.all()
 
+
 class Mutation(graphene.ObjectType):
     create_section = CreateSection.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -6,9 +6,11 @@ from sections.models import Section
 from django.utils.timezone import now
 from datetime import date
 
+
 class SectionType(DjangoObjectType):
     class Meta:
         model = Section
+
 
 class CreateSection(graphene.Mutation):
     # Define final parameter types
@@ -30,14 +32,14 @@ class CreateSection(graphene.Mutation):
         xLocation = graphene.Int(required=True)
         yLocation = graphene.Int(required=True)
 
-    def mutate(self, info, bed_id, xLocation, yLocation, **kwargs ):
+    def mutate(self, info, bed_id, xLocation, yLocation, **kwargs):
         # Get bed associated with id
         bed = Bed.objects.get(id=bed_id)
 
         # Retrieve optionally passed key word arguments
-        end_date = kwargs.get('end_date', date(year=2100, month=1, day=1))
-        is_active = kwargs.get('is_active', True) 
-        start_date = kwargs.get('start_date', now())
+        end_date = kwargs.get("end_date", date(year=2100, month=1, day=1))
+        is_active = kwargs.get("is_active", True)
+        start_date = kwargs.get("start_date", now())
 
         # Save new section with all parameters
         section = Section(
@@ -46,10 +48,10 @@ class CreateSection(graphene.Mutation):
             start_date=start_date,
             xLocation=xLocation,
             yLocation=yLocation,
-            bed=bed
+            bed=bed,
         )
         section.save()
-    
+
         # Return all parameters
         return CreateSection(
             id=bed.id,
@@ -58,8 +60,9 @@ class CreateSection(graphene.Mutation):
             start_date=start_date,
             xLocation=xLocation,
             yLocation=yLocation,
-            bed=bed
+            bed=bed,
         )
+
 
 class Query(graphene.ObjectType):
     sections = graphene.List(SectionType)
@@ -67,7 +70,9 @@ class Query(graphene.ObjectType):
     def resolve_sections(self, info):
         return Section.objects.all()
 
+
 class Mutation(graphene.ObjectType):
     create_section = CreateSection.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

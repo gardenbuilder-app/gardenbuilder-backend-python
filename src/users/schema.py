@@ -2,9 +2,11 @@ import graphene
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 
+
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
+
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
@@ -24,6 +26,7 @@ class CreateUser(graphene.Mutation):
 
         return CreateUser(user=user)
 
+
 class Query(graphene.AbstractType):
     current_user = graphene.Field(UserType)
     users = graphene.List(UserType)
@@ -34,8 +37,9 @@ class Query(graphene.AbstractType):
     def resolve_current_user(self, info):
         user = info.context.user
         if user.is_anonymous:
-            raise Exception('Not logged in!')
+            raise Exception("Not logged in!")
         return user
+
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()

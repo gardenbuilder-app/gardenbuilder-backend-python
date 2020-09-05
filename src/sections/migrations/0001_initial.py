@@ -10,22 +10,37 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('beds', '0002_auto_20200901_2234'),
+        ("beds", "0002_auto_20200901_2234"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Section',
+            name="Section",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('end_date', models.DateField(blank=True, null=True)),
-                ('start_date', models.DateField(default=django.utils.timezone.now)),
-                ('is_active', models.BooleanField(default=True)),
-                ('xLocation', models.PositiveSmallIntegerField(default=0)),
-                ('yLocation', models.PositiveSmallIntegerField(default=0)),
-                ('bed', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sections', to='beds.bed')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("end_date", models.DateField(blank=True, null=True)),
+                ("start_date", models.DateField(default=django.utils.timezone.now)),
+                ("is_active", models.BooleanField(default=True)),
+                ("xLocation", models.PositiveSmallIntegerField(default=0)),
+                ("yLocation", models.PositiveSmallIntegerField(default=0)),
+                (
+                    "bed",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="sections",
+                        to="beds.bed",
+                    ),
+                ),
             ],
         ),
     ]

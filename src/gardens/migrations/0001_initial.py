@@ -8,22 +8,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Garden',
+            name="Garden",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('end_date', models.DateField(blank=True, null=True)),
-                ('garden_name', models.CharField(max_length=100)),
-                ('start_date', models.DateField(default=django.utils.timezone.now)),
-                ('is_active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("end_date", models.DateField(blank=True, null=True)),
+                ("garden_name", models.CharField(max_length=100)),
+                ("start_date", models.DateField(default=django.utils.timezone.now)),
+                ("is_active", models.BooleanField(default=True)),
             ],
             options={
-                'ordering': ['created'],
+                "ordering": ["created"],
             },
         ),
     ]

@@ -3,9 +3,11 @@ from graphene_django import DjangoObjectType
 from .models import Garden
 from users.schema import UserType
 
+
 class GardenType(DjangoObjectType):
     class Meta:
         model = Garden
+
 
 class CreateGarden(graphene.Mutation):
     id = graphene.Int()
@@ -20,12 +22,13 @@ class CreateGarden(graphene.Mutation):
 
         garden = Garden(garden_name=garden_name, owner=user)
         garden.save()
-        
+
         return CreateGarden(
             id=garden.id,
             garden_name=garden.garden_name,
             owner=garden.owner,
         )
+
 
 class Query(graphene.ObjectType):
     gardens = graphene.List(GardenType)
@@ -33,7 +36,9 @@ class Query(graphene.ObjectType):
     def resolve_gardens(self, info):
         return Garden.objects.all()
 
+
 class Mutation(graphene.ObjectType):
     create_garden = CreateGarden.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
