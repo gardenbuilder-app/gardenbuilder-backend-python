@@ -16,4 +16,5 @@ repos:
     rev: v1.5.4
     hooks:
     - id: autopep8
+      exclude: ^migrations/
 
