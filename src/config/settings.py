@@ -31,12 +31,10 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "graphene_django",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -54,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -150,3 +149,9 @@ AUTHENTICATION_BACKENDS = [
 
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
+
+# Custom CORS settings
+CORS_ALLOWED_ORIGINS = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+]
