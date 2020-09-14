@@ -8,7 +8,6 @@ class GardenType(DjangoObjectType):
     class Meta:
         model = Garden
 
-
 class CreateGarden(graphene.Mutation):
     id = graphene.Int()
     garden_name = graphene.String(required=True)
@@ -28,7 +27,6 @@ class CreateGarden(graphene.Mutation):
             garden_name=garden.garden_name,
             owner=garden.owner,
         )
-
 
 class Query(graphene.ObjectType):
     gardens = graphene.List(GardenType)

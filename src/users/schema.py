@@ -6,22 +6,21 @@ from django.contrib.auth import get_user_model
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
-
+        description = " Type definition for a single garden "
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
 
     class Arguments:
-        # username = graphene.String(required=True)
         password = graphene.String(required=True)
         email = graphene.String(required=True)
 
-    def mutate(self, info, username, password, email):
+    def mutate(self, info, password, email):
         user = get_user_model()(
-            # username=username,
             email=email,
         )
         user.set_password(password)
+        print(user)
         user.save()
 
         return CreateUser(user=user)
