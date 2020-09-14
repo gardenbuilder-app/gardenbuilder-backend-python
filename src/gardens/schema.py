@@ -30,6 +30,13 @@ class CreateGarden(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     gardens = graphene.List(GardenType)
+    user_gardens = graphene.List(GardenType)
+    
+    def resolve_user_gardens(self, info):
+        user = info.context.user
+        if user.is_anonymous:
+            raise Exception("Not logged in!")
+        return Garden.objects.filter(owner=user)
 
     def resolve_gardens(self, info):
         return Garden.objects.all()
