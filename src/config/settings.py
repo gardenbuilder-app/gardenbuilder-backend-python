@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from environ import Env
+from os import path
 
 env = Env()
 
@@ -134,8 +135,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = "/static/"
+STATIC_ROOT = path.join(BASE_DIR, 'static')
+#STATIC_URL = "/static/"
+STATIC_URL = "https://storage.googleapis.com/gardenbuilder-backend/static"
 
 # Graphene
 GRAPHENE = {
