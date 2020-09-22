@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "psycopg2",
+    "config",
     "beds",
     "gardens",
     "plants",
@@ -136,8 +137,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_ROOT = path.join(BASE_DIR, 'static')
-#STATIC_URL = "/static/"
-STATIC_URL = "https://storage.googleapis.com/gardenbuilder-backend/static"
+#STATIC_ROOT = "/static/"
+STATIC_URL = "https://storage.googleapis.com/gardenbuilder-backend/static/"
+'''
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, 'static'), # static directory (in the top level directory) for local testing
+]
+'''
 
 # Graphene
 GRAPHENE = {
@@ -158,4 +164,10 @@ AUTH_USER_MODEL = "users.CustomUser"
 CORS_ALLOWED_ORIGINS = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
+]
+
+# Allowed hosts in addition to local
+ALLOWED_HOSTS = [
+    'localhost',
+    "gardenbuilder-backend.uc.r.appspot.com",
 ]
