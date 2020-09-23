@@ -20,7 +20,6 @@ class CreateUser(graphene.Mutation):
             email=email,
         )
         user.set_password(password)
-        print(user)
         user.save()
 
         return CreateUser(user=user)
@@ -31,7 +30,11 @@ class Query(graphene.AbstractType):
     users = graphene.List(UserType)
 
     def resolve_users(self, info):
-        return get_user_model().objects.all()
+        user = info.context.user
+        if user.is_superuser:
+            return get_user_model().objects.all()
+        raise Exception("You must be a superuser to view other user's data")
+        
     
     def resolve_current_user(self, info):
         user = info.context.user
