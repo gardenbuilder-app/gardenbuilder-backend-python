@@ -5,7 +5,6 @@ from users.models import CustomUser
 from datetime import datetime
 from graphene_django.utils.testing import GraphQLTestCase, graphql_query
 
-
 class TestGardenInstance:
     """
     Test that various properties are created by default on a new Garden object
@@ -51,7 +50,6 @@ class TestGraphQLQueries(GraphQLTestCase):
     Test that GraphQL queries related to gardens work and throw errors appropriately
     """
 
-    @pytest.mark.filterwarnings("ignore")
     def test_gardens_query(self):
         response = self.query(
             """
@@ -67,12 +65,10 @@ class TestGraphQLQueries(GraphQLTestCase):
             }
             """
         )
-        content = json.loads(response.content)
 
-        # This validates the status code and if you get errors
         self.assertResponseNoErrors(response)
 
-    @pytest.mark.filterwarnings("ignore")
+
     def test_incorrect_gardens_query_throws_error(self):
         response = self.query(
             """
@@ -90,7 +86,6 @@ class TestGraphQLQueries(GraphQLTestCase):
             """
         )
 
-        # This validates the status code and if you get errors
         self.assertResponseHasErrors(response)
 
 
