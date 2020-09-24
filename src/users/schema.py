@@ -25,7 +25,7 @@ class CreateUser(graphene.Mutation):
         return CreateUser(user=user)
 
 
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     current_user = graphene.Field(UserType)
     users = graphene.List(UserType)
 
