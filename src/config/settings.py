@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from environ import Env
-from os import path
+from os import path, getenv
 
 env = Env()
 
@@ -88,6 +88,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+host = 'DB_HOST_CLOUD' if getenv('GAE_APPLICATION', None) else 'DB_HOST_LOCAL'
 
 DATABASES = {
     "default": {
@@ -95,7 +96,7 @@ DATABASES = {
         "NAME": env("DB_NAME"),
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
+        "HOST": env(host),
         "PORT": env("DB_PORT"),
     }
 }
