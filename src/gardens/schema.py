@@ -18,7 +18,6 @@ class CreateGarden(graphene.Mutation):
 
     def mutate(self, info, garden_name):
         user = info.context.user or None
-
         garden = Garden(garden_name=garden_name, owner=user)
         garden.save()
 
