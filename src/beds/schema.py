@@ -16,7 +16,7 @@ class BedType(DjangoObjectType):
 class CreateBed(graphene.Mutation):
     # Define final parameter types
     id = graphene.Int()
-    bed_name = graphene.String(required=True)
+    name = graphene.String(required=True)
     garden = graphene.Field(GardenType)
     start_date = graphene.Date(required=False)
     length = graphene.Int(required=True)
@@ -25,14 +25,14 @@ class CreateBed(graphene.Mutation):
 
     # Define accepted arguments
     class Arguments:
-        bed_name = graphene.String(required=True)
+        name = graphene.String(required=True)
         garden_id = graphene.Int(required=True)
         start_date = graphene.Date(required=False)
         length = graphene.Int(required=True)
         width = graphene.Int(required=True)
         notes = graphene.String(required=False)
 
-    def mutate(self, info, bed_name, length, width, garden_id, **kwargs):
+    def mutate(self, info, name, length, width, garden_id, **kwargs):
         # Get logged in user info
         user = info.context.user
         if user.is_anonymous:
@@ -48,7 +48,7 @@ class CreateBed(graphene.Mutation):
 
         # Save new bed with all parameters
         bed = Bed(
-            bed_name=bed_name,
+            name=name,
             length=length,
             width=width,
             garden=garden,
@@ -60,7 +60,7 @@ class CreateBed(graphene.Mutation):
         # Return all parameters
         return CreateBed(
             id=bed.id,
-            bed_name=bed_name,
+            name=name,
             garden=garden,
             length=length,
             notes=notes,
