@@ -61,8 +61,8 @@ class CreateSection(graphene.Mutation):
             end_date=end_date,
             is_active=is_active,
             start_date=start_date,
-            square_footage=square_footage
-            square_footage_sfg=square_footage_sfg
+            square_footage=square_footage,
+            square_footage_sfg=square_footage_sfg,
             section=section
         )
 
