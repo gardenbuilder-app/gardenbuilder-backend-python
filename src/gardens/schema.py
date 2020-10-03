@@ -18,7 +18,6 @@ class CreateGarden(graphene.Mutation):
 
     def mutate(self, info, name):
         user = info.context.user or None
-
         garden = Garden(name=name, owner=user)
         garden.save()
 
@@ -34,7 +33,6 @@ class Query(graphene.ObjectType):
     
     def resolve_user_gardens(self, info):
         user = info.context.user
-        print(f'user is {user}')
         if user.is_anonymous:
             raise Exception("Not logged in!")
         return Garden.objects.filter(owner=user)
