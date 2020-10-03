@@ -4,7 +4,7 @@ from gardens.models import Garden
 
 
 class Bed(models.Model):
-    bed_name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
     garden = models.ForeignKey(
