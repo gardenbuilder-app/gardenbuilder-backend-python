@@ -14,17 +14,17 @@ class TestGardenInstance:
     EMAIL = "test@test.com"
     PASSWORD = "testing1234"
     user = CustomUser(email=EMAIL, password=PASSWORD)
-    garden = Garden(garden_name=GARDEN_NAME, owner=user)
+    garden = Garden(name=GARDEN_NAME, owner=user)
 
-    """ garden_name is assigned to __str__ method """
+    """ name is assigned to __str__ method """
 
     def test_str_matches_garden_name(self):
         assert str(self.garden) == self.GARDEN_NAME
 
-    """ garden_name matches what we entered """
+    """ name matches what we entered """
 
     def test_garden_name_matches(self):
-        assert self.garden.garden_name == self.GARDEN_NAME
+        assert self.name == self.GARDEN_NAME
 
     """ start_date exists as a date """
 
