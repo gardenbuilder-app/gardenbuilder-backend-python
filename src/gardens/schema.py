@@ -10,21 +10,21 @@ class GardenType(DjangoObjectType):
 
 class CreateGarden(graphene.Mutation):
     id = graphene.Int()
-    garden_name = graphene.String(required=True)
+    name = graphene.String(required=True)
     owner = graphene.Field(UserType)
 
     class Arguments:
-        garden_name = graphene.String(required=True)
+        name = graphene.String(required=True)
 
-    def mutate(self, info, garden_name):
+    def mutate(self, info, name):
         user = info.context.user or None
 
-        garden = Garden(garden_name=garden_name, owner=user)
+        garden = Garden(name=name, owner=user)
         garden.save()
 
         return CreateGarden(
             id=garden.id,
-            garden_name=garden.garden_name,
+            name=garden.name,
             owner=garden.owner,
         )
 
