@@ -49,3 +49,4 @@ MANIFEST
 env
 **/*.env
 .idea/
+.vscode/
