@@ -72,7 +72,7 @@ class CreateBed(graphene.Mutation):
 class Query(graphene.ObjectType):
     beds = graphene.List(BedType)
     # beds_by_garden = graphene.Field(Bed, gardenId=Int(required=False))
-    
+
     # def resolve_beds_by_garden(self, info, gardenId):
     #     try:
     #         user = info.context.user
@@ -95,8 +95,8 @@ class Query(graphene.ObjectType):
 
     def resolve_beds(self, info):
         user = info.context.user
-        if not ( user.is_superuser || user.is_staff ):
-            raise Exception("You must be a superuser to view all beds")
+        if not ( user.is_superuser | user.is_staff ):
+            raise Exception("You must be a superuser or staff to view all beds")
         return Bed.objects.all()
 
 
