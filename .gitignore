@@ -16,6 +16,10 @@ cloud_sql_proxy
 # in your Git repository. Update and uncomment the following line accordingly.
 src/static
 
+# Editors
+*/.swp
+.vscode
+
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
 *.py[cod]
