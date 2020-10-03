@@ -6,7 +6,7 @@ from django.conf import settings
 class Garden(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
-    garden_name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False)
     start_date = models.DateField(default=now)
     is_active = models.BooleanField(default=True)
     owner = models.ForeignKey(
@@ -18,7 +18,7 @@ class Garden(models.Model):
     )
 
     def __str__(self):
-        return self.garden_name
+        return self.name
 
     class Meta:
         ordering = ["created"]
