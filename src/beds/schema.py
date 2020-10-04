@@ -71,6 +71,7 @@ class CreateBed(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     beds = graphene.List(BedType)
+    beds_for_user = graphene.List(BedType, gardenId=graphene.Int(required=False))
     # beds_by_garden = graphene.Field(Bed, gardenId=Int(required=False))
 
     # def resolve_beds_by_garden(self, info, gardenId):
@@ -101,15 +102,16 @@ class Query(graphene.ObjectType):
     def resolve_beds_for_user(self, info, gardenId=None):
         user = info.context.user
         try:
+            print(user)
             if user.is_anonymous:
-                raise Exception("Not logged in, so you don't have ")
+                raise Exception("Not logged in, so you don't have beds")
         except Exception:
             raise
         else:
             filter_params = {}
             if gardenId:
                 filter_params = {'garden': gardenId}
-            filter_params.update({'garden__owner': user})
+            filter_params.update({'owner': user})
             return Bed.objects.filter(**filter_params)
 
 
