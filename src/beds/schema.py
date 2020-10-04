@@ -112,7 +112,7 @@ class Query(graphene.ObjectType):
             if gardenId:
                 filter_params = {'garden': gardenId}
             filter_params.update({'garden__owner': user})
-            return beds.objects.filter(**filter_params)
+            return Bed.objects.filter(**filter_params)
 
 
 
