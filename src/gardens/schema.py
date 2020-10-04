@@ -38,6 +38,9 @@ class Query(graphene.ObjectType):
         return Garden.objects.filter(owner=user)
 
     def resolve_gardens(self, info):
+        user = info.context.user
+        if not (user.is_superuser or user.is_staff):
+            raise Exception("You must be a superuser to view all gardens")
         return Garden.objects.all()
 
 

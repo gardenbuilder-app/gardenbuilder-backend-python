@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from gardens.models import Garden
+from django.conf import settings
 
 
 class Bed(models.Model):
@@ -14,9 +15,14 @@ class Bed(models.Model):
     length = models.PositiveSmallIntegerField(default=0)
     width = models.PositiveSmallIntegerField(default=0)
     notes = models.CharField(max_length=500)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='user_beds',
+        null=True)
 
     def __str__(self):
-        return self.bed_name
+        return self.name
 
     class Meta:
         ordering = ["created"]
