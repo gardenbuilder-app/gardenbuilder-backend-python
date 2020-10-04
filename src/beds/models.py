@@ -19,6 +19,7 @@ class Bed(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='user_beds',
+        null=True
         )
 
     def __str__(self):

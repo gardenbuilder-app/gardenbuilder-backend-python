@@ -49,6 +49,8 @@ class CreateBed(graphene.Mutation):
         start_date = kwargs.get("start_date", now())
         notes = kwargs.get("notes", "")
 
+        print('adding bed')
+
         # Save new bed with all parameters
         bed = Bed(
             name=name,

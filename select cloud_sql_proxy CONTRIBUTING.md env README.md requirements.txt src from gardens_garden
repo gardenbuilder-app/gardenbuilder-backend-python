@@ -1,0 +1,21 @@
+                       List of relations
+ Schema |               Name                | Type  |   Owner   
+--------+-----------------------------------+-------+-----------
+ public | auth_group                        | table | dthompson
+ public | auth_group_permissions            | table | dthompson
+ public | auth_permission                   | table | dthompson
+ public | beds_bed                          | table | dthompson
+ public | django_admin_log                  | table | dthompson
+ public | django_content_type               | table | dthompson
+ public | django_migrations                 | table | dthompson
+ public | django_session                    | table | dthompson
+ public | gardens_garden                    | table | dthompson
+ public | plantChoices_plantchoice          | table | dthompson
+ public | plants_plant                      | table | dthompson
+ public | sections_section                  | table | dthompson
+ public | users_customuser                  | table | dthompson
+ public | users_customuser_groups           | table | dthompson
+ public | users_customuser_user_permissions | table | dthompson
+ public | varieties_variety                 | table | dthompson
+(16 rows)
+
