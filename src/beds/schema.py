@@ -95,7 +95,7 @@ class Query(graphene.ObjectType):
 
     def resolve_beds(self, info):
         user = info.context.user
-        if not ( user.is_superuser || user.is_staff ):
+        if not ( user.is_superuser or user.is_staff ):
             raise Exception("You must be a superuser to view all beds")
         return Bed.objects.all()
 
