@@ -71,6 +71,7 @@ class CreateBed(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     beds = graphene.List(BedType)
+    beds_for_user = graphene.List(BedType, gardenId=graphene.Int(required=False))
     # beds_by_garden = graphene.Field(Bed, gardenId=Int(required=False))
 
     # def resolve_beds_by_garden(self, info, gardenId):
@@ -92,12 +93,25 @@ class Query(graphene.ObjectType):
     #         print "Unexpected error:", sys.exc_info()[0]
     #         raise
 
-
     def resolve_beds(self, info):
         user = info.context.user
-        if not ( user.is_superuser | user.is_staff ):
+        if not (user.is_superuser | user.is_staff):
             raise Exception("You must be a superuser or staff to view all beds")
         return Bed.objects.all()
+
+    def resolve_beds_for_user(self, info, gardenId=None):
+        user = info.context.user
+        try:
+            if user.is_anonymous:
+                raise Exception("Not logged in, so you don't have beds")
+        except Exception:
+            raise
+        else:
+            filter_params = {}
+            if gardenId:
+                filter_params = {'garden': gardenId}
+            filter_params.update({'owner': user})
+            return Bed.objects.filter(**filter_params)
 
 
 class Mutation(graphene.ObjectType):
