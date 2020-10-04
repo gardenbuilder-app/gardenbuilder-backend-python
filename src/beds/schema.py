@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from beds.models import Bed
 from gardens.models import Garden
 from gardens.schema import GardenType
+from users.schema import UserType
 from django.utils.timezone import now
 import traceback
 import datetime
@@ -22,6 +23,8 @@ class CreateBed(graphene.Mutation):
     length = graphene.Int(required=True)
     width = graphene.Int(required=True)
     notes = graphene.String(required=False)
+    owner = graphene.Field(UserType)
+
 
     # Define accepted arguments
     class Arguments:
@@ -54,6 +57,7 @@ class CreateBed(graphene.Mutation):
             garden=garden,
             start_date=start_date,
             notes=notes,
+            owner_id=user.id
         )
         bed.save()
 
@@ -66,6 +70,7 @@ class CreateBed(graphene.Mutation):
             notes=notes,
             start_date=start_date,
             width=width,
+            owner=user
         )
 
 
