@@ -102,7 +102,6 @@ class Query(graphene.ObjectType):
     def resolve_beds_for_user(self, info, gardenId=None):
         user = info.context.user
         try:
-            print(user)
             if user.is_anonymous:
                 raise Exception("Not logged in, so you don't have beds")
         except Exception:
