@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Bed',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('bed_name', models.CharField(max_length=100)),
+                ('name', models.CharField(max_length=100)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('end_date', models.DateField(blank=True, null=True)),
                 ('is_active', models.BooleanField(default=True)),
