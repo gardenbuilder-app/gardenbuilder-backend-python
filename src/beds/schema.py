@@ -100,6 +100,22 @@ class Query(graphene.ObjectType):
         return Bed.objects.all()
 
 
+    def resolve_beds_for_user(self, info, gardenId=None):
+        user = info.context.user
+        try:
+            if user.is_anonymous:
+                raise Exception("Not logged in, so you don't have ")
+        except Exception:
+            raise
+        else:
+            filter_params = {}
+            if gardenId:
+                filter_params = {'garden': gardenId}
+            filter_params.update({'garden__owner': user})
+            return beds.objects.filter(**filter_params)
+
+
+
 class Mutation(graphene.ObjectType):
     create_bed = CreateBed.Field()
 
