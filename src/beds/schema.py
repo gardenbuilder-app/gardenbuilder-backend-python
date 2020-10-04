@@ -72,26 +72,6 @@ class CreateBed(graphene.Mutation):
 class Query(graphene.ObjectType):
     beds = graphene.List(BedType)
     beds_for_user = graphene.List(BedType, gardenId=graphene.Int(required=False))
-    # beds_by_garden = graphene.Field(Bed, gardenId=Int(required=False))
-
-    # def resolve_beds_by_garden(self, info, gardenId):
-    #     try:
-    #         user = info.context.user
-    #         garden = Garden.objects.filter(id = gardenId)
-    #         print(garden)
-    #         if user.is_anonymous:
-    #             raise Exception("Not logged in!")
-    #         return Bed.objects.filter(owner=user, garden=gardenId)
-
-    #     except IOError as (errno, strerror):
-    #         print "I/O error({0}): {1}".format(errno, strerror)
-
-    #     except ValueError:
-    #         print "Could not convert data to an integer."
-
-    #     except:
-    #         print "Unexpected error:", sys.exc_info()[0]
-    #         raise
 
     def resolve_beds(self, info):
         user = info.context.user
