@@ -17,7 +17,7 @@ class Bed(models.Model):
     notes = models.CharField(max_length=500)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
         related_name='user_beds',
         )
 
