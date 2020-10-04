@@ -92,13 +92,11 @@ class Query(graphene.ObjectType):
     #         print "Unexpected error:", sys.exc_info()[0]
     #         raise
 
-
     def resolve_beds(self, info):
         user = info.context.user
-        if not ( user.is_superuser | user.is_staff ):
+        if not (user.is_superuser | user.is_staff):
             raise Exception("You must be a superuser or staff to view all beds")
         return Bed.objects.all()
-
 
     def resolve_beds_for_user(self, info, gardenId=None):
         user = info.context.user
@@ -113,7 +111,6 @@ class Query(graphene.ObjectType):
                 filter_params = {'garden': gardenId}
             filter_params.update({'garden__owner': user})
             return Bed.objects.filter(**filter_params)
-
 
 
 class Mutation(graphene.ObjectType):
