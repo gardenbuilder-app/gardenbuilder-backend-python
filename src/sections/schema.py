@@ -65,9 +65,9 @@ class CreateSection(graphene.Mutation):
 
 
 class Query(graphene.ObjectType):
-    sections = graphene.List(SectionType)
+    all_sections = graphene.List(SectionType)
 
-    def resolve_sections(self, info):
+    def resolve_all_sections(self, info):
         return Section.objects.all()
 
 

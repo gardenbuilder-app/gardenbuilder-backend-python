@@ -28,16 +28,16 @@ class CreateGarden(graphene.Mutation):
         )
 
 class Query(graphene.ObjectType):
+    all_gardens = graphene.List(GardenType)
     gardens = graphene.List(GardenType)
-    user_gardens = graphene.List(GardenType)
     
-    def resolve_user_gardens(self, info):
+    def resolve_gardens(self, info):
         user = info.context.user
         if user.is_anonymous:
             raise Exception("Not logged in!")
         return Garden.objects.filter(owner=user)
 
-    def resolve_gardens(self, info):
+    def resolve_all_gardens(self, info):
         user = info.context.user
         if not (user.is_superuser or user.is_staff):
             raise Exception("You must be a superuser to view all gardens")
