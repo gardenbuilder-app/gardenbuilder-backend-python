@@ -13,7 +13,7 @@ class TestGraphQLQueries(GraphQLTestCase):
             query {
                 beds {
                     id
-                    bedName
+                    name
                 }
             }
             """
