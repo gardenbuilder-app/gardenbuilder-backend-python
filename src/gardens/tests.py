@@ -5,6 +5,7 @@ from users.models import CustomUser
 from datetime import datetime
 from graphene_django.utils.testing import GraphQLTestCase, graphql_query
 
+
 class TestGardenInstance:
     """
     Test that various properties are created by default on a new Garden object
@@ -24,7 +25,7 @@ class TestGardenInstance:
     """ name matches what we entered """
 
     def test_garden_name_matches(self):
-        assert self.name == self.GARDEN_NAME
+        assert self.garden.name == self.GARDEN_NAME
 
     """ start_date exists as a date """
 
@@ -48,6 +49,7 @@ class TestGardenInstance:
 class TestGraphQLQueries(GraphQLTestCase):
     """
     Test that GraphQL queries related to gardens work and throw errors appropriately
+    TODO: Add test to ensure that a user who is_staff or is_superuser can call query w/o error
     """
 
     def test_gardens_query(self):
@@ -56,7 +58,7 @@ class TestGraphQLQueries(GraphQLTestCase):
             query {
                 gardens {
                     id
-                    gardenName
+                    name
                     owner {
                         id
                         email
@@ -66,7 +68,8 @@ class TestGraphQLQueries(GraphQLTestCase):
             """
         )
 
-        self.assertResponseNoErrors(response)
+        # Should throw exception since user is not staff or superuser
+        self.assertResponseHasErrors(response)
 
 
     def test_incorrect_gardens_query_throws_error(self):
@@ -75,7 +78,7 @@ class TestGraphQLQueries(GraphQLTestCase):
             query {
                 gardens {
                     id
-                    gardenName
+                    name
                     dingdong
                     owner {
                         id
@@ -87,37 +90,3 @@ class TestGraphQLQueries(GraphQLTestCase):
         )
 
         self.assertResponseHasErrors(response)
-
-
-# class TestGraphQLQueries:
-
-#     """ define fixture """
-#     @pytest.fixture
-#     def query(client):
-#         def func(*args, **kwargs):
-#             return graphql_query(*args, **kwargs, client=client)
-#         return func
-
-#     @pytest.mark.current
-#     @pytest.mark.django_db
-#     @pytest.mark.filterwarnings("ignore")
-#     def test_gardens_query(query):
-#         response = query(
-#             '''
-#             query {
-#                 gardens {
-#                     id
-#                     gardenName
-#                     owner {
-#                         id
-#                         email
-#                     }
-#                 }
-#             }
-#             '''
-#         )
-#         # content returned in json format
-#         content = json.loads(response.content)
-
-#         # response 200 with no errors
-#         assert 'errors' not in content
