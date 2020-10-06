@@ -19,6 +19,7 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
+        export DJANGO_SETTINGS_MODULE=src/config.settings
         pytest src
     # - name: Lint with flake8
     #   run: |
