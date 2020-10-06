@@ -21,10 +21,8 @@ jobs:
         pip install pytest
         pytest src
       env:
-        - name: DJANGO_SETTINGS_MODULE
-          value: config.settings
-        - name: DJANGO_SECRET_KEY
-          value: "e!x2z+3pnm#=qg#8$0_2gzizli#3ez@75l&8$)5_y%nb#xcii3"
+        DJANGO_SETTINGS_MODULE: config.settings
+        DJANGO_SECRET_KEY: "e!x2z+3pnm#=qg#8$0_2gzizli#3ez@75l&8$)5_y%nb#xcii3"
 
     # - name: Lint with flake8
     #   run: |
