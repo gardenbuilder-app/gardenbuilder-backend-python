@@ -25,8 +25,8 @@ class CreateBed(graphene.Mutation):
     notes = graphene.String(required=False)
     owner = graphene.Field(UserType)
 
-
     # Define accepted arguments
+
     class Arguments:
         name = graphene.String(required=True)
         garden_id = graphene.Int(required=True)
@@ -78,12 +78,14 @@ class CreateBed(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     beds = graphene.List(BedType)
-    beds_for_user = graphene.List(BedType, gardenId=graphene.Int(required=False))
+    beds_for_user = graphene.List(
+        BedType, gardenId=graphene.Int(required=False))
 
     def resolve_beds(self, info):
         user = info.context.user
         if not (user.is_superuser | user.is_staff):
-            raise Exception("You must be a superuser or staff to view all beds")
+            raise Exception(
+                "You must be a superuser or staff to view all beds")
         return Bed.objects.all()
 
     def resolve_beds_for_user(self, info, gardenId=None):

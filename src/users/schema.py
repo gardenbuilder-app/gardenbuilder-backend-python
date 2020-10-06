@@ -8,6 +8,7 @@ class UserType(DjangoObjectType):
         model = get_user_model()
         description = " Type definition for a single garden "
 
+
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
 
@@ -34,8 +35,7 @@ class Query(graphene.ObjectType):
         if user.is_superuser:
             return get_user_model().objects.all()
         raise Exception("You must be a superuser to view other user's data")
-        
-    
+
     def resolve_current_user(self, info):
         user = info.context.user
         if user.is_anonymous:

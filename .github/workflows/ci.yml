@@ -1,5 +1,5 @@
-name: 
-on: 
+name:
+on:
   push:
     branches:
       - master

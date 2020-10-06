@@ -17,7 +17,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Bed',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('end_date', models.DateField(blank=True, null=True)),
@@ -26,7 +27,8 @@ class Migration(migrations.Migration):
                 ('length', models.PositiveSmallIntegerField(default=0)),
                 ('width', models.PositiveSmallIntegerField(default=0)),
                 ('notes', models.CharField(max_length=500)),
-                ('garden', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='beds', to='gardens.garden')),
+                ('garden', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                             related_name='beds', to='gardens.garden')),
             ],
             options={
                 'ordering': ['created'],

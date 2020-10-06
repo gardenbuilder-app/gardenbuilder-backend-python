@@ -8,6 +8,7 @@ class GardenType(DjangoObjectType):
     class Meta:
         model = Garden
 
+
 class CreateGarden(graphene.Mutation):
     id = graphene.Int()
     name = graphene.String(required=True)
@@ -27,10 +28,11 @@ class CreateGarden(graphene.Mutation):
             owner=garden.owner,
         )
 
+
 class Query(graphene.ObjectType):
     gardens = graphene.List(GardenType)
     user_gardens = graphene.List(GardenType)
-    
+
     def resolve_user_gardens(self, info):
         user = info.context.user
         if user.is_anonymous:

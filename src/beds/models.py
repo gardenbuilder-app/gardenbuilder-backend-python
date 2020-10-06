@@ -20,7 +20,7 @@ class Bed(models.Model):
         on_delete=models.CASCADE,
         related_name='user_beds',
         null=True
-        )
+    )
 
     def __str__(self):
         return self.name

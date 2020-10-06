@@ -18,5 +18,6 @@ class TestGraphQLQueries(GraphQLTestCase):
             }
             """
         )
-        error_message = json.loads(response.content).get('errors')[0].get('message')
+        error_message = json.loads(response.content).get('errors')[
+            0].get('message')
         assert 'You must be a superuser or staff' in error_message

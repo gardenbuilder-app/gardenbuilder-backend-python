@@ -10,6 +10,7 @@ from graphene_django.utils.testing import GraphQLTestCase, graphql_query
 Test whether creating a new user works
 """
 
+
 @pytest.mark.django_db
 def test_create_new_user():
     CustomUser.objects.create_user(
@@ -22,6 +23,7 @@ def test_create_new_user():
 Test that adding username when trying to create user throws error
 """
 
+
 @pytest.mark.django_db
 def test_creating_user_with_username_throws_error():
     with pytest.raises(Exception) as e:
@@ -33,6 +35,7 @@ def test_creating_user_with_username_throws_error():
         assert (
             str(e.value) == "CustomUser() got an unexpected keyword argument 'username'"
         )
+
 
 class TestGraphQLQueries(GraphQLTestCase):
     """
@@ -50,5 +53,6 @@ class TestGraphQLQueries(GraphQLTestCase):
                 }
             '''
         )
-        error_message = json.loads(response.content).get('errors')[0].get('message')
+        error_message = json.loads(response.content).get('errors')[
+            0].get('message')
         assert 'You must be a superuser' in error_message

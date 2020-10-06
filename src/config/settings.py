@@ -163,8 +163,8 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 # Custom CORS settings
 CORS_ALLOWED_ORIGINS = [
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 # Allowed hosts in addition to local

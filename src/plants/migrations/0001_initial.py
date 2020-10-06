@@ -17,15 +17,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Plant',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('end_date', models.DateField(blank=True, null=True)),
                 ('start_date', models.DateField(default=django.utils.timezone.now)),
                 ('is_active', models.BooleanField(default=True)),
                 ('name', models.CharField(max_length=100)),
-                ('square_footage', models.DecimalField(decimal_places=2, default=0.25, max_digits=3)),
-                ('square_footage_sfg', models.DecimalField(decimal_places=2, default=0.25, max_digits=3)),
-                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='plants', to='sections.section')),
+                ('square_footage', models.DecimalField(
+                    decimal_places=2, default=0.25, max_digits=3)),
+                ('square_footage_sfg', models.DecimalField(
+                    decimal_places=2, default=0.25, max_digits=3)),
+                ('section', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                              related_name='plants', to='sections.section')),
             ],
         ),
     ]

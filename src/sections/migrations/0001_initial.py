@@ -17,14 +17,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Section',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('end_date', models.DateField(blank=True, null=True)),
                 ('start_date', models.DateField(default=django.utils.timezone.now)),
                 ('is_active', models.BooleanField(default=True)),
                 ('xLocation', models.PositiveSmallIntegerField(default=0)),
                 ('yLocation', models.PositiveSmallIntegerField(default=0)),
-                ('bed', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sections', to='beds.bed')),
+                ('bed', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                          related_name='sections', to='beds.bed')),
             ],
         ),
     ]

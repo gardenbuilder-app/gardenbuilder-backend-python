@@ -1,5 +1,5 @@
                        List of relations
- Schema |               Name                | Type  |   Owner   
+ Schema |               Name                | Type  |   Owner
 --------+-----------------------------------+-------+-----------
  public | auth_group                        | table | dthompson
  public | auth_group_permissions            | table | dthompson

@@ -72,7 +72,6 @@ class TestGraphQLQueries(GraphQLTestCase):
         # Should throw exception since user is not staff or superuser
         self.assertResponseHasErrors(response)
 
-
     def test_incorrect_gardens_query_throws_error(self):
         response = self.query(
             """
