@@ -20,8 +20,7 @@ class TestGardenInstance:
     """ name is assigned to __str__ method """
 
     def test_str_matches_garden_name(self):
-        #assert str(self.garden) == self.GARDEN_NAME
-        assert str(self.garden) == "THIS IS A FAKE TEST"
+        assert str(self.garden) == self.GARDEN_NAME
 
     """ name matches what we entered """
 
