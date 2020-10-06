@@ -16,13 +16,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-    - name: Test with pytest
-      run: |
-        pip install pytest
-        pytest src
-      env:
-        DJANGO_SETTINGS_MODULE: config.settings
-        DJANGO_SECRET_KEY: "e!x2z+3pnm#=qg#8$0_2gzizli#3ez@75l&8$)5_y%nb#xcii3"
+    # - name: Test with pytest
+    #   run: |
+    #     pip install pytest
+    #     pytest src
+    #   env:
+    #     DJANGO_SETTINGS_MODULE: config.settings
+    #     DJANGO_SECRET_KEY: "e!x2z+3pnm#=qg#8$0_2gzizli#3ez@75l&8$)5_y%nb#xcii3"
 
     # - name: Lint with flake8
     #   run: |
