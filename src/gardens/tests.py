@@ -21,7 +21,7 @@ class TestGardenInstance:
 
     def test_str_matches_garden_name(self):
         #assert str(self.garden) == self.GARDEN_NAME
-        assert str(self.garden) == "THIS IS BROKEN"
+        assert str(self.garden) == "THIS IS A FAKE TEST"
 
     """ name matches what we entered """
 
