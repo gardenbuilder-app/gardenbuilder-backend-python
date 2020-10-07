@@ -4,7 +4,7 @@ repos:
     - id: pytest
       name: Test with Pytest
       language: system
-      entry: pytest src
+      entry: pytest
       pass_filenames: false
       always_run: true
 -   repo: https://github.com/pre-commit/pre-commit-hooks
