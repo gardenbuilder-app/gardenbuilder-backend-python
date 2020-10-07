@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "psycopg2",
     "config",
+    "pages",
     "beds",
     "gardens",
     "plants",
