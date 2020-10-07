@@ -1,6 +1,6 @@
 steps:
 - name: "gcr.io/cloud-builders/gcloud"
-  # args: ["app", "deploy"]
-  entrypoint: "ls"
-  args: ["-la", "/workspace"]
+  dir: "src"
+  args: ["app", "deploy"]
+
 timeout: "1600s"
