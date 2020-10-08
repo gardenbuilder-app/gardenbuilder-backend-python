@@ -16,4 +16,4 @@ handlers:
   script: auto
 
 env_variables:
-  SECRET_KEY: {{env[DJANGO_SECRET_KEY]}}
+  SECRET_KEY: {{ env['DJANGO_SECRET_KEY'] }}
