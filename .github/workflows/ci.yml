@@ -7,18 +7,16 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: ./
 
 jobs:
 
   test:
     name: Test
     runs-on: ubuntu-latest
+    container: python:3.8-slim
     services:
       postgres:
         image: postgres
-        ports: 
-          - 5432:5432
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: secret
@@ -27,19 +25,14 @@ jobs:
       DB_NAME: gardenbuilder
       DB_USER: root
       DB_PASSWORD: secret
-      DB_HOST_LOCAL: localhost
+      DB_HOST_LOCAL: postgres
       DB_PORT: 5432
       DJANGO_SECRET_KEY: secretKeyHere
     steps:
-      - uses: actions/checkout@v1
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
-      - name: Install dependency
+      - uses: actions/checkout@v2
+      - name: Install dependencies
         run: |
-          pwd
-          ls -R
+          python -m pip install --upgrade pip
           pip install --no-cache-dir -r requirements.txt
       - name: Run tests
         run: |
