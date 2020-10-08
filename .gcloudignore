@@ -17,6 +17,9 @@ __pycache__/
 # Ignored by the build system
 /setup.cfg
 
+# env
+env
+
 # unneccesary for deployment
 README.md
 CONTRIBUTING.md
