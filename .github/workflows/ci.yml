@@ -1,17 +1,47 @@
-name: 
+name: garden-builder-backend-ci
 on: 
   push:
     branches:
-      - master
+      - github-actions-ci-cd
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
 jobs:
-  build:
+
+  test:
+    name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports: 
+          - 5432:5432
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: gardenbuilder
+    env:
+      DB_NAME: gardenbuilder
+      DB_USER: root
+      DB_PASSWORD: secret
+      DB_HOST_LOCAL: localhost
+      DB_PORT: 5432
+      DJANGO_SECRET_KEY: secretKeyHere
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependency
+        run: |
+          pwd
+          ls -R
+          pip install --no-cache-dir -r requirements.txt
+      - name: Run tests
+        run: |
+          cd src
+          ./manage.py test
