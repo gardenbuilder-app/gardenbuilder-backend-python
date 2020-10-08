@@ -2,7 +2,7 @@ name: garden-builder-backend-ci
 on: 
   push:
     branches:
-      - github-actions-ci-cd
+      - master
 
 defaults:
   run:
