@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
-
+from graphql_jwt.shortcuts import get_token
 
 class UserType(DjangoObjectType):
     class Meta:
@@ -11,6 +11,7 @@ class UserType(DjangoObjectType):
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
+    token = graphene.String()
 
     class Arguments:
         password = graphene.String(required=True)
@@ -22,8 +23,9 @@ class CreateUser(graphene.Mutation):
         )
         user.set_password(password)
         user.save()
+        user_token = get_token(user)
 
-        return CreateUser(user=user)
+        return CreateUser(user=user,token=user_token)
 
 
 class Query(graphene.ObjectType):
