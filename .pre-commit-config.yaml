@@ -2,19 +2,21 @@ repos:
 -   repo: local
     hooks:
     - id: pytest
-      name: pytest
+      name: Test with Pytest
       language: system
       entry: pytest
       pass_filenames: false
       always_run: true
-      stages: [push]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
     - id: trailing-whitespace
+      name: Remove trailing whitespace
+      exclude: ^migrations/
 -   repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v1.5.4
     hooks:
     - id: autopep8
+      name: Run Autopep8 linter
       exclude: ^migrations/
 

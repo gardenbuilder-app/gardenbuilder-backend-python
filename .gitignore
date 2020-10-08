@@ -11,10 +11,11 @@ media
 ### Google Cloud ###
 cloud_sql_proxy
 */app.yaml
+cloudbuild*
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
-src/static
+static
 
 # Editors
 */.swp
@@ -56,4 +57,7 @@ MANIFEST
 env
 **/*.env
 .idea/
-.vscode/
+
+# Random
+.pytest_cache
+

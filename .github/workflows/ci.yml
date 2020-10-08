@@ -1,5 +1,5 @@
 name: garden-builder-backend-ci
-on: 
+on:
   push:
     branches:
       - master

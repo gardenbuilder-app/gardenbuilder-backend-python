@@ -1,5 +1,0 @@
-{
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": "/home/dthompson/Code/personal/gardenbuilder-api-new/env/bin/python3"
-}

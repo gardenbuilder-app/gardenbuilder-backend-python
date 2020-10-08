@@ -4,7 +4,7 @@ Resolves: #issueNumber
 ## Description:
 A short description of what you did, and why.
 
-## Tests: 
+## Tests:
 Description of any tests you may have written to support this feature, if any. Tests are appreciated for all features of the app.
 
 ## Checklist:
