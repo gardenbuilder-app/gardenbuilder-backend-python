@@ -22,7 +22,7 @@ You'll need to also set up a postgresql database named gardenbuilder. I would fo
 
 Alternatively, you could run postgresql locally using docker: `docker run -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=gardenbuilder -p 127.0.0.1:5432:5432/tcp library/postgres`
 
-Finally, you'll need to add the following into the `src/config/.env`:
+Finally, you'll need to add the following into the `config/.env`:
 
 ```
 DB_NAME=gardenbuilder
@@ -36,8 +36,8 @@ DJANGO_SECRET_KEY=secretKeyHere
 ### To Run
 
 ```bash
-python src/manage.py migrate
-python src/manage.py runserver
+python manage.py migrate
+python manage.py runserver
 ```
 
 Then navigate to [localhost:8000/graphql](http://localhost:8000/graphql).
@@ -53,8 +53,7 @@ query {
 
 ### To Run Tests
 
-1. `cd src`
-2. `python manage.py test`
+`python manage.py test`
 
 ## Contributing
 
