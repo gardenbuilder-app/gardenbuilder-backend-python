@@ -26,6 +26,8 @@ class Mutation(
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()
+    delete_token = graphql_jwt.DeleteJSONWebTokenCookie.Field()
+    delete_refresh_token = graphql_jwt.DeleteRefreshTokenCookie.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
