@@ -2,7 +2,7 @@ name: garden-builder-backend-ci
 on:
   push:
     branches:
-      - master
+      - github-actions-ci-cd
 
 defaults:
   run:
@@ -19,15 +19,15 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: root
-          POSTGRES_PASSWORD: secret
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
           POSTGRES_DB: gardenbuilder
     env:
       DB_NAME: gardenbuilder
       DB_USER: root
-      DB_PASSWORD: secret
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       DB_HOST_LOCAL: postgres
       DB_PORT: 5432
-      DJANGO_SECRET_KEY: secretKeyHere
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
