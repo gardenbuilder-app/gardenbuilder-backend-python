@@ -50,6 +50,9 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+#test
+.pytest_cache/
+
 # Environments
 env
 **/*.env
