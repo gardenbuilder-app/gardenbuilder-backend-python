@@ -2,7 +2,7 @@ name: garden-builder-backend-ci
 on:
   push:
     branches:
-      - github-actions-ci-cd
+      - master
 
 defaults:
   run:
@@ -18,14 +18,18 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: root
+          POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          POSTGRES_DB: gardenbuilder
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
     env:
-      DB_NAME: gardenbuilder
-      DB_USER: root
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      # In testing jobs, all services are automatically available via 
+      # docker bridge network, so we can neither expose any port, 
+      # nor can we change port and host of the postgres service.
       DB_HOST_LOCAL: postgres
+      DB_HOST: ${{ secrets.DB_HOST }}
       DB_PORT: 5432
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     steps:
