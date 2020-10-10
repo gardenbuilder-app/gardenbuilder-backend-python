@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from django.contrib.auth import get_user_model
 from graphql_jwt.shortcuts import get_token
 
+
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
@@ -25,7 +26,7 @@ class CreateUser(graphene.Mutation):
         user.save()
         user_token = get_token(user)
 
-        return CreateUser(user=user,token=user_token)
+        return CreateUser(user=user, token=user_token)
 
 
 class Query(graphene.ObjectType):
@@ -40,8 +41,9 @@ class Query(graphene.ObjectType):
 
     def resolve_current_user(self, info):
         user = info.context.user
-        if user.is_anonymous:
-            raise Exception("Not logged in!")
+        # Uncomment if we don't want to return an anonymous user
+        # if user.is_anonymous:
+        #     raise Exception("Not logged in!")
         return user
 
 
