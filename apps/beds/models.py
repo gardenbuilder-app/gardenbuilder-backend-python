@@ -1,11 +1,13 @@
 from django.db import models
 from django.utils.timezone import now
-from apps.gardens.models import Garden
 from django.conf import settings
+
+from apps.gardens.models import Garden
 
 
 class Bed(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    description = models.CharField(max_length=60, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True, null=True)
     garden = models.ForeignKey(
