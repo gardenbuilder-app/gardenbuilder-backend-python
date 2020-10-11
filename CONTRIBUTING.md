@@ -1,4 +1,6 @@
 # Contributing
+* __Ensure no one is working on the issue you want to work on & contributors must have the issue assigned for which they are submitting Pull Request.__
+* You can send pull requests directly also but for only minor documentation updates.
 
 We would love some help, especially for [Hacktoberfest](https://hacktoberfest.digitalocean.com/)!
 
@@ -13,3 +15,5 @@ For all other changes, please submit an issue before submitting a pull request! 
 ### Further Involvement
 
 If you are interested in ok-ing pull requests, co-managing this repo or anything else beyond occasional contributions, please email me at capndavet@gmail.com. I'd love your help!
+
+**Star this repository** if you had fun!
