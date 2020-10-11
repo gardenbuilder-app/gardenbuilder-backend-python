@@ -78,17 +78,16 @@ class SectionQueryTests(GraphQLTestCase):
     def test_sections_query_without_data(self):
         res = self.query(self.SECTION_QUERY)
         data = json.loads(res.content)['data']
-        assert data['sections'] == None
+        assert len(data['sections']) == 0
 
-    # def test_sections_query_with_data(self):
-    #     section = _create_default_section()
-    #     res = self.query(self.SECTION_QUERY)
-    #     data = json.loads(res.content)['data']
-    #     print(data)
+    def test_sections_query_with_data(self):
+        section = _create_default_section()
+        res = self.query(self.SECTION_QUERY)
+        data = json.loads(res.content)['data']
 
-    #     assert len(data['sections']) == 1
-    #     assert data['sections'][0]['id'] == str(section.id)
-    #     assert data['sections'][0]['bed']['name'] == 'Secret Bed'
+        assert len(data['sections']) == 1
+        assert data['sections'][0]['id'] == str(section.id)
+        assert data['sections'][0]['bed']['name'] == 'Secret Bed'
 
 
 class SectionMutationTest(GraphQLTestCase):

@@ -54,7 +54,7 @@ class CreateSection(graphene.Mutation):
 
         # Return all parameters
         return CreateSection(
-            id=bed.id,
+            id=section.id,
             end_date=end_date,
             is_active=is_active,
             start_date=start_date,
@@ -67,7 +67,7 @@ class CreateSection(graphene.Mutation):
 class Query(graphene.ObjectType):
     sections = graphene.List(SectionType)
 
-    def resolve_all_sections(self, info):
+    def resolve_sections(self, info):
         return Section.objects.all()
 
 
