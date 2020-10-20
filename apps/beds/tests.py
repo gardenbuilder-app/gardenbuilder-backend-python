@@ -28,6 +28,7 @@ class TestGraphQLQueries(GraphQLTestCase):
             0].get('message')
         assert 'You must be a superuser or staff' in error_message
 
+# Creates a test Bed record with the new description field/property
 class TestBed:
 
     user = CustomUser(email = 'bed@test.com', password = 'test123')

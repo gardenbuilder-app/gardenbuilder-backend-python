@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import migrations, models
 
-
+# adding the description to the database on the beds_bed table
 class Migration(migrations.Migration):
 
     dependencies = [
