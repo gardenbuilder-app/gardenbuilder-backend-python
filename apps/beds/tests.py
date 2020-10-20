@@ -30,12 +30,14 @@ class TestGraphQLQueries(GraphQLTestCase):
 
 class TestBed:
 
-    user = CustomUser(email = 'bed2@test.com', password = 'test123')
+    user = CustomUser(email = 'bed@test.com', password = 'test123')
     user.save()
-    garden = Garden(name = 'Bed Garden 2')
+
+    garden = Garden(name = 'Garden Beds')
     garden.save()
 
-    testBed = Bed(name = 'Bed 1',
+    # positive test for setting a description
+    testBed = Bed(name = 'Bed',
                   description = 'Test Description',
                   garden = garden,
                   start_date = '2020-10-19',
@@ -44,4 +46,15 @@ class TestBed:
                   notes = 'This is a test',
                   owner = user)
     testBed.save()
-    print ('Test bed created')
+
+    # negative test for not setting a description
+    testBed = Bed(name = 'Bed 2',
+                  garden = garden,
+                  start_date = '2020-10-19',
+                  length = 8,
+                  width = 4,
+                  notes = 'This is a test',
+                  owner = user)
+    testBed.save()
+
+    print('Test bed created')
